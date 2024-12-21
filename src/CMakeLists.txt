@@ -5,7 +5,7 @@ SET(MICRO_VERSION 0)
 if( BUILD_SHARED_LIBRARY )
   add_library( clew SHARED clew.c )
 else()
-  add_library( clew clew.c )
+  add_library( clew STATIC clew.c )
 endif()
 
 set_target_properties(clew
