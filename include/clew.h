@@ -2605,10 +2605,8 @@ typedef CL_API_ENTRY cl_int (CL_API_CALL *clGetGLContextInfoKHR_fn)(
   #  define CLEWAPI extern
   #else
   #  ifdef clew_EXPORTS
-#pragma message("exporting")
   #    define CLEWAPI extern __declspec(dllexport)
   #  else
-#pragma message("importing")
   #    define CLEWAPI extern __declspec(dllimport)
   #  endif
   #endif
