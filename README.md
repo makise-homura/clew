@@ -94,6 +94,10 @@ To test it works ok.  You'll need at least one OpenCL-enabled device to do this 
 ## Build options
 
 * BUILD_TESTS: build test executable, default ON
-* BUILD_SHARED_LIBRARY: build dll/so, instead of .lib/.a.  default OFF
+* BUILD_SHARED_LIBRARY: explicitly build dll/so, default OFF
+* BUILD_STATIC_LIBRARY: explicitly build lib/a, default OFF
 * INSTALL_CL_HEADER: creates include files directory `proxy-opencl`, which you can give eg to clBLAS during build, and it will build ok, without needing opencl headers installed
 
+BUILD_SHARED_LIBRARY and BUILD_STATIC_LIBRARY may not be used simultaneously.
+If none of them is on (it's the default), then CMake's global BUILD_SHARED_LIBS
+will be used to decide which type of library to build.

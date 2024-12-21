@@ -1,7 +1,8 @@
 project(clew)
 
 option( BUILD_TESTS "Build test program." ON )
-option( BUILD_SHARED_LIBRARY "Shared library, rather than static library." OFF )
+option( BUILD_SHARED_LIBRARY "Build shared library." OFF )
+option( BUILD_STATIC_LIBRARY "Build static library." OFF )
 option( INSTALL_CL_HEADER "Install cl.h / opencl.h  proxy headers to ease compilation of software not aware of CLEW" OFF )
 
 cmake_minimum_required (VERSION 2.6)
@@ -25,7 +26,10 @@ if(CMAKE_COMPILER_IS_GNUCC)
 endif()
 
 add_definitions(-DCL_USE_DEPRECATED_OPENCL_1_1_APIS)
-if( NOT BUILD_SHARED_LIBRARY )
+if(BUILD_SHARED_LIBRARY AND BUILD_STATIC_LIBRARY)
+    message(FATAL_ERROR "Choose either BUILD_SHARED_LIBRARY or BUILD_STATIC_LIBRARY, or disable both to rely on global BUILD_SHARED_LIBS")
+endif()
+if(BUILD_STATIC_LIBRARY OR NOT BUILD_SHARED_LIBS)
   add_definitions(-Dclew_STATIC)
 endif()
 
@@ -38,4 +42,3 @@ add_subdirectory(include)
 if( BUILD_TESTS )
   add_subdirectory(clewTest)
 endif( BUILD_TESTS )
-
